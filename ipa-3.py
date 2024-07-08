@@ -81,7 +81,24 @@ def tic_tac_toe(board):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+    
+    out="NO WINNER"
+    
+    for row in board: #horizontal
+        if all(letter==row[0] and letter for letter in row): 
+            return row[0] #return winner symbol
+            
+    for column in range(len(board)): #vertical
+        if all(row[column]==board[0][column] and row[column] for row in board):
+            return board[0][column]
+            
+    if all(board[i][i]==board[0][0] and board[i][i] for i in range(len(board))): #diagonal\
+        return board[0][0]
+
+    elif all(board[i][len(board) - i - 1] == board[0][len(board)-1] and board[0][len(board)-1] for i in range(len(board))): #diagonal/
+        return board[0][len(board)-1]
+        
+    return result 
 
 def eta(first_stop, second_stop, route_map):
     '''ETA.
@@ -114,4 +131,32 @@ def eta(first_stop, second_stop, route_map):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+        
+    new_route = []
+
+    for pair, value in route_map.items(): 
+        start_stop = pair[0]
+        end_stop = pair[1]
+        travel_time = value["travel_time_mins"]
+        new_route.append((start_stop, end_stop, travel_time))
+        
+    for leg in new_route: 
+        if leg[0] == first_stop: 
+            first_leg = leg 
+            break
+
+    next_stop = first_leg[1]
+    time = first_leg[2]
+
+    while next_stop != second_stop: 
+        for leg in new_route: 
+            if leg[0] == next_stop: 
+                next_leg = leg 
+                break 
+
+        time += next_leg[2]
+        next_stop = next_leg[1]
+
+    return time
+    
+    
