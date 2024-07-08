@@ -96,9 +96,9 @@ def tic_tac_toe(board):
         return board[0][0]
 
     elif all(board[i][len(board) - i - 1] == board[0][len(board)-1] and board[0][len(board)-1] for i in range(len(board))): #diagonal/
-        return board[0][len(board)-1]
+        return result -board[0][len(board)-1]
         
-    return result 
+    return out 
 
 def eta(first_stop, second_stop, route_map):
     '''ETA.
